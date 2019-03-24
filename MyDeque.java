@@ -45,32 +45,34 @@ public class MyDeque<E>{
 //ACCOUNT FOR SIZING
 
   public void addFirst(E element){
-    if (element == null) throw new NullPointerException("Can't add nulls");
+    //can't add nulls
+    if (element == null) throw new NullPointerException();
     size = size + 1;
     start = start - 1;
     data[start] = element;
   }
 
   public void addLast(E element){
-    if (element == null) throw new NullPointerException("Can't add nulls");
+    //can't add nulls
+    if (element == null) throw new NullPointerException();
     size = size + 1;
     data[end] = element;
     end = end + 1;
   }
-
-  public E removeFirst(E element){
-    if (size = 0) throw new NoSuchElementException();
-    E ret = data[element];
-    data[element] = null;
+  
+  public E removeFirst(){
+    //if deque is empty
+    if (size <= 0) throw new NoSuchElementException();
+    E ret = data[start];
     size = size - 1;
     start = start + 1;
     return ret;
   }
 
-  public E removeLast(E element){
-    if (size = 0) throw new NoSuchElementException();
-    E ret = data[element];
-    data[element] = null;
+  public E removeLast(){
+    //if deque is empty
+    if (size <= 0) throw new NoSuchElementException();
+    E ret = data[end];
     size = size - 1;
     end = end -1;
     return ret;
