@@ -42,17 +42,20 @@ public class MyDeque<E>{
     return ret;
   }
 
+//ACCOUNT FOR SIZING
+
   public void addFirst(E element){
-    if (element == null) throw new NullPointerException();
+    if (element == null) throw new NullPointerException("Can't add nulls");
     size = size + 1;
-    data[start-1] = element;
-    //move
+    start = start - 1;
+    data[start] = element;
   }
 
   public void addLast(E element){
-    if (element == null) throw new NullPointerException();
+    if (element == null) throw new NullPointerException("Can't add nulls");
     size = size + 1;
-    data[size] = element;
+    data[end] = element;
+    end = end + 1;
   }
 
   public E removeFirst(E element){
