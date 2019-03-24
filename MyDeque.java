@@ -49,6 +49,7 @@ public class MyDeque<E>{
     if (element == null) throw new NullPointerException();
     size = size + 1;
     start = start - 1;
+    positionCheckup();
     data[start] = element;
   }
 
@@ -56,10 +57,11 @@ public class MyDeque<E>{
     //can't add nulls
     if (element == null) throw new NullPointerException();
     size = size + 1;
-    data[end] = element;
     end = end + 1;
+    positionCheckup();
+    data[end] = element;
   }
-  
+
   public E removeFirst(){
     //if deque is empty
     if (size <= 0) throw new NoSuchElementException();
@@ -79,11 +81,13 @@ public class MyDeque<E>{
   }
 
   public E getFirst(E element){
-    if (size = 0) throw new NoSuchElementException();
+    if (size <= 0) throw new NoSuchElementException();
     return data[start];
   }
+
   public E getLast(E element){
-    if (size = 0) throw new NoSuchElementException();
-    return data[last];
+    if (size <= 0) throw new NoSuchElementException();
+    return data[end-1];
   }
+
 }
