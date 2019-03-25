@@ -7,7 +7,7 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque() {
     size = 0;
-    data = (E[]new Object[10]);
+    data = (E[])new Object[10];
     start = 0;
     end = 0;
   }
@@ -15,7 +15,7 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     size = 0;
-    data = (E[]new Object[initialCapacity]);
+    data = (E[])new Object[initialCapacity];
     start = 0;
     end = 0;
   }
@@ -58,7 +58,7 @@ public class MyDeque<E>{
     if (element == null) throw new NullPointerException();
     size = size + 1;
     end = end + 1;
-    positionCheckup();
+    positionCheckup2();
     data[end] = element;
   }
 
@@ -89,5 +89,50 @@ public class MyDeque<E>{
     if (size <= 0) throw new NoSuchElementException();
     return data[end-1];
   }
+
+  public void positionCheckup(){
+    if (start < 0) {
+      if (data[data.length-1] == null) {
+        start = data.length-1;
+      }
+      else if (data[data.length-1] != null || data[start-1] != null) {
+        resize();
+        start = data.length-1;
+      }
+    }
+  }
+
+  public void positionCheckup2(){
+    if (end > data.length-1) {
+      if (data[0] == null) {
+        end = 0;
+      }
+      else if (data[0] != null || data[end+1] != null) {
+        resize();
+        end = size;
+      }
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void resize() {
+    E[] resize = (E[])new Object[size*2];
+    if (start < end) {
+      for (int i = 0; i < size; i++) {
+        resize[i] = data[start+1];
+      }
+    }
+    else {
+      int index = 0;
+      for (int i = 0; i < size; i++) {
+        if (start + i < data.length) resize[i] = data[start+i];
+        else {
+          resize[i] = data[index];
+          index++;
+        }
+      }
+    }
+  }
+
 
 }
