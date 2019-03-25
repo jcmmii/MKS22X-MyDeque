@@ -47,19 +47,38 @@ public class MyDeque<E>{
   public void addFirst(E element){
     //can't add nulls
     if (element == null) throw new NullPointerException();
-    size = size + 1;
-    start = start - 1;
     positionCheckup();
     data[start] = element;
+    size = size + 1;
+  }
+
+  private void positionCheckup(){
+    if (size >= data.length) resize();
+    if (size == 0) {
+      if (end == data.length) {
+        end = 1;
+      } else {
+        end = end +1;
+      }
+    } else if (start == 0) {
+      start = data.length -1;
+    } else {
+      start = start -1;
+    }
   }
 
   public void addLast(E element){
     //can't add nulls
     if (element == null) throw new NullPointerException();
+    if (size >= data.length) resize();
+    if (end == data.length) {
+      end = 1;
+      data[0] = element;
+    } else {
+      end = end + 1;
+      data[end-1] = element;
+    }
     size = size + 1;
-    end = end + 1;
-    positionCheckup2();
-    data[end] = element;
   }
 
   public E removeFirst(){
@@ -106,29 +125,7 @@ public class MyDeque<E>{
     return data[end-1];
   }
 
-  private void positionCheckup(){
-    if (start < 0) {
-      if (data[data.length-1] == null) {
-        start = data.length-1;
-      }
-      else if (data[data.length-1] != null || data[start-1] != null) {
-        resize();
-        start = data.length-1;
-      }
-    }
-  }
 
-  private void positionCheckup2(){
-    if (end > data.length-1) {
-      if (data[0] == null) {
-        end = 0;
-      }
-      else if (data[0] != null || data[end+1] != null) {
-        resize();
-        end = size;
-      }
-    }
-  }
 
   private void check0() {
     if (size == 0) {
