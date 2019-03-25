@@ -50,7 +50,7 @@ public class MyDeque<E>{
     size = size + 1;
   }
 
-  private void positionCheckup(){
+  private void positionCheckup(){ //helper method
     if (size >= data.length) resize(); //the size count is >= than actual size of array, resize required.
     if (size == 0) {
       if (end != data.length) {
@@ -100,7 +100,7 @@ public class MyDeque<E>{
   }
 
 
-  //accessor methods 
+  //accessor methods
   public E getFirst(){
     if (size <= 0) throw new NoSuchElementException();
     return data[start];
@@ -115,11 +115,10 @@ public class MyDeque<E>{
     return size;
   }
 
-
   @SuppressWarnings("unchecked")
   private void resize() {
-    E[] resize = (E[])new Object[size*2];
-    int index = -1;
+    E[] resize = (E[])new Object[size*2]; //resize doubles
+    int index = -1; //start at -1 (so it indexes correctly every time it goes through loops)
     if (start < end) {
       for (int i = start; i < size; i++) {
         index++;
@@ -137,7 +136,7 @@ public class MyDeque<E>{
         resize[index] = data[i];
       }
     }
-    data = resize;
+    data = resize; //replace data with the resize array
     start = 0;
     end = index + 1;
   }
