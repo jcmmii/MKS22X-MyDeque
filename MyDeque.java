@@ -26,6 +26,7 @@ public class MyDeque<E>{
 
   public String toString(){
     String ret = "";
+    if (size == 0) return "{}";
     if (start < end) {
       for (int i = start; i < end; i++) {
         ret = ret + data[i] + " ";
@@ -38,8 +39,7 @@ public class MyDeque<E>{
         ret = ret + data[i] + " ";
       }
     }
-    ret = "{" + ret + "}";
-    return ret;
+    return "{" + ret + "}";
   }
 
 //ACCOUNT FOR SIZING
@@ -96,12 +96,12 @@ public class MyDeque<E>{
     return ret;
   }
 
-  public E getFirst(E element){
+  public E getFirst(){
     if (size <= 0) throw new NoSuchElementException();
     return data[start];
   }
 
-  public E getLast(E element){
+  public E getLast(){
     if (size <= 0) throw new NoSuchElementException();
     return data[end-1];
   }
@@ -139,23 +139,25 @@ public class MyDeque<E>{
 
   @SuppressWarnings("unchecked")
   private void resize() {
-    E[] resize = (E[])new Object[size*2];
+    E[] resize = (E[])new Object[(data.length-1)*2];
+    int index = 0;
     if (start < end) {
-      for (int i = 0; i < size; i++) {
-        resize[i] = data[start+1];
+      for (int i = start; i < size; i++) {
+        resize[index] = data[i];
+        index++;
       }
     }
     else {
-      int index = 0;
-      for (int i = 0; i < size; i++) {
-        if (start + i < data.length) resize[i] = data[start+i];
-        else {
-          resize[i] = data[index];
-          index++;
-        }
+      for (int i = start; i < data.length; i++) {
+        resize[index] = data[i];
+      }
+      for (int i = 0; i < end; i++) {
+        resize[index] = data[i];
       }
     }
+    data = resize;
+    start = 0;
+    end = index + 1;
   }
-
 
 }
