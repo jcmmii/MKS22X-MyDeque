@@ -66,8 +66,16 @@ public class MyDeque<E>{
     //if deque is empty
     if (size <= 0) throw new NoSuchElementException();
     E ret = data[start];
+    data[start] = null;
     size = size - 1;
-    start = start + 1;
+    check0();
+    if (size == 1) {
+      start = end;
+    } else if (start == data.length-1) {
+        start = 0;
+      } else {
+        start = start + 1;
+      }
     return ret;
   }
 
@@ -75,8 +83,16 @@ public class MyDeque<E>{
     //if deque is empty
     if (size <= 0) throw new NoSuchElementException();
     E ret = data[end];
+    data[end] = null;
     size = size - 1;
-    end = end -1;
+    check0();
+    if (size == 1) {
+      end = start;
+    } else if (end == 0) {
+        end = data.length-1;
+      } else {
+        end = end -1;
+      }
     return ret;
   }
 
@@ -90,7 +106,7 @@ public class MyDeque<E>{
     return data[end-1];
   }
 
-  public void positionCheckup(){
+  private void positionCheckup(){
     if (start < 0) {
       if (data[data.length-1] == null) {
         start = data.length-1;
@@ -102,7 +118,7 @@ public class MyDeque<E>{
     }
   }
 
-  public void positionCheckup2(){
+  private void positionCheckup2(){
     if (end > data.length-1) {
       if (data[0] == null) {
         end = 0;
@@ -111,6 +127,13 @@ public class MyDeque<E>{
         resize();
         end = size;
       }
+    }
+  }
+
+  private void check0() {
+    if (size == 0) {
+      start = 0;
+      end = 0;
     }
   }
 
