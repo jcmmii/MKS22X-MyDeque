@@ -9,17 +9,18 @@ public class Calculator{
       MyDeque<String> values = new MyDeque();
       for (int x = 0; x < s.length(); x++) {
         if (s.charAt(x) != ' ') {
-          boolean spaceCheck = false;
-          int n = 0;
+          boolean spaceCheck = true;
+          int n = 1;
           String hold = "";
-          while (!spaceCheck) {
-            if (s.charAt(x+n)!=' ' && x+n < s.length()) {
+          while (spaceCheck) {
+            if (s.charAt(x+n-1)!=' ' && x+n < s.length()) {
               n++;
             }
             else {
               hold = "" + s.substring(x,x+n);
-              spaceCheck = true;
-              n=0;
+              spaceCheck = false;
+              x = x + n;
+              n=1;
             }
           }
           if (checkNumber(hold)) {
