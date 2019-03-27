@@ -4,6 +4,30 @@ public class Calculator{
      */
     @SuppressWarnings("unchecked")
     public static double eval(String s){
+      MyDeque<Integer> calculation = MyDeque();
+      for (int x = 0; x < s.length()-1; x++){
+        if (s.charAt(x) != ' ') {
+          if (checkNumber(s.substring(x,x+1))) {
+            calculation.addLast(Integer.parseInt(s.substring(x,x+1)));
+          } else {
+            Int int1 = calculation.getFirst();
+            Int int2 = calculation.getFirst();
+            Int ret = 0;
+            if (s.substring(x,x+1).equals("+")) 
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+/*
       MyDeque<String> calculation = new MyDeque();
       MyDeque<String> operations = new MyDeque();
       MyDeque<String> values = new MyDeque();
@@ -31,6 +55,7 @@ public class Calculator{
         }
       }
 
+*/
  /*
         if (values.size() >= 2 && operations.size() >= 1) {
           String op = operations.removeFirst();
@@ -83,3 +108,10 @@ public class Calculator{
 
 
 }
+
+
+
+//one MyDeque
+//encounter number add to mydeu
+//take last two numbers for MyDeque
+//do operation //put back
