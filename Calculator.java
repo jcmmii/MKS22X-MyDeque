@@ -13,7 +13,12 @@ public class Calculator{
             Int int1 = calculation.getFirst();
             Int int2 = calculation.getFirst();
             Int ret = 0;
-            if (s.substring(x,x+1).equals("+")) 
+            if (s.substring(x,x+1).equals("+")) ret = int1 + int2;
+            if (s.substring(x,x+1).equals("-")) ret = int1 - int2;
+            if (s.substring(x,x+1).equals("*")) ret = int1 * int2;
+            if (s.substring(x,x+1).equals("/")) ret = ret1 / ret2;
+            if (s.substring(x,x+1).equals("%")) ret = ret1 % ret2;
+
           }
         }
       }
