@@ -4,33 +4,26 @@ public class Calculator{
      */
     @SuppressWarnings("unchecked")
     public static double eval(String s){
-      MyDeque<Integer> calculation = MyDeque();
+      MyDeque<Double> calculation = new MyDeque();
       for (int x = 0; x < s.length()-1; x++){
         if (s.charAt(x) != ' ') {
           if (checkNumber(s.substring(x,x+1))) {
-            calculation.addLast(Integer.parseInt(s.substring(x,x+1)));
+            calculation.addLast(Double.parseDouble(s.substring(x,x+1)));
           } else {
-            Int int1 = calculation.getFirst();
-            Int int2 = calculation.getFirst();
-            Int ret = 0;
-            if (s.substring(x,x+1).equals("+")) ret = int1 + int2;
-            if (s.substring(x,x+1).equals("-")) ret = int1 - int2;
-            if (s.substring(x,x+1).equals("*")) ret = int1 * int2;
-            if (s.substring(x,x+1).equals("/")) ret = ret1 / ret2;
-            if (s.substring(x,x+1).equals("%")) ret = ret1 % ret2;
-
+            double dou1 = calculation.getFirst();
+            double dou2 = calculation.getFirst();
+            double ret = 0;
+            if (s.substring(x,x+1).equals("+")) ret = dou1 + dou2;
+            if (s.substring(x,x+1).equals("-")) ret = dou1 - dou2;
+            if (s.substring(x,x+1).equals("*")) ret = dou1 * dou2;
+            if (s.substring(x,x+1).equals("/")) ret = dou1 / dou2;
+            if (s.substring(x,x+1).equals("%")) ret = dou1 % dou2;
+            if (ret != 0.0) calculation.addFirst(ret);
           }
         }
       }
-
-
-
-
-
-
-
-
-
+      return ret;
+    }
 
 /*
       MyDeque<String> calculation = new MyDeque();
@@ -78,12 +71,7 @@ public class Calculator{
 
       }
 */
-    System.out.println(values);
-    System.out.println(operations);
-    return 0.0;
 
-
-}
       private static boolean checkNumber(String str) {
         try {
           Double.parseDouble(str);
