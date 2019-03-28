@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Calculator{
     /*Evaluate a postfix expression stored in s.
      *Assume valid postfix notation, separated by spaces.
@@ -5,22 +7,26 @@ public class Calculator{
     @SuppressWarnings("unchecked")
     public static double eval(String s){
       MyDeque<Double> calculation = new MyDeque();
+      String[] arr = s.split(" ");
+      System.out.println(Arrays.toString(arr));
       double ret = 0.0;
-      for (int x = 0; x < s.length()-1; x++){
-        if (s.charAt(x) != ' ') {
-          if (checkNumber(s.substring(x,x+1))) {
-            calculation.addLast(Double.parseDouble(s.substring(x,x+1)));
-          } else {
-            double dou1 = calculation.getFirst();
-            double dou2 = calculation.getFirst();
-            if (s.substring(x,x+1).equals("+")) ret = dou1 + dou2;
-            if (s.substring(x,x+1).equals("-")) ret = dou1 - dou2;
-            if (s.substring(x,x+1).equals("*")) ret = dou1 * dou2;
-            if (s.substring(x,x+1).equals("/")) ret = dou1 / dou2;
-            if (s.substring(x,x+1).equals("%")) ret = dou1 % dou2;
-            if (ret != 0.0) calculation.addFirst(ret);
+      for (int x = 0; x < arr.length; x++){
+        if (checkNumber(arr[x])) {
+          calculation.addLast(Double.parseDouble(arr[x]));
+          System.out.println(calculation.size());
+          System.out.println(calculation);
+        } else {
+          double dou1 = calculation.removeLast();
+          double dou2 = calculation.removeLast();
+          System.out.println(calculation);
+          if (arr[x].equals("+")) ret = dou2 + dou1;
+          if (arr[x].equals("-")) ret = dou2 - dou1;
+          if (arr[x].equals("*")) ret = dou2 * dou1;
+          if (arr[x].equals("/")) ret = dou2 / dou1;
+          if (arr[x].equals("%")) ret = dou2 % dou1;
+          if (ret != 0.0) calculation.addLast(ret);
+          System.out.println(calculation);
           }
-        }
       }
       return ret;
     }
