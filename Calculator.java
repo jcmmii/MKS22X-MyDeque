@@ -8,24 +8,24 @@ public class Calculator{
     public static double eval(String s){
       MyDeque<Double> calculation = new MyDeque();
       String[] arr = s.split(" ");
-      System.out.println(Arrays.toString(arr));
+    //  System.out.println(Arrays.toString(arr));
       double ret = 0.0;
       for (int x = 0; x < arr.length; x++){
         if (checkNumber(arr[x])) {
           calculation.addLast(Double.parseDouble(arr[x]));
-          System.out.println(calculation.size());
-          System.out.println(calculation);
+      //    System.out.println(calculation.size());
+      //    System.out.println(calculation);
         } else {
           double dou1 = calculation.removeLast();
           double dou2 = calculation.removeLast();
-          System.out.println(calculation);
+      //    System.out.println(calculation);
           if (arr[x].equals("+")) ret = dou2 + dou1;
           if (arr[x].equals("-")) ret = dou2 - dou1;
           if (arr[x].equals("*")) ret = dou2 * dou1;
           if (arr[x].equals("/")) ret = dou2 / dou1;
           if (arr[x].equals("%")) ret = dou2 % dou1;
           if (ret != 0.0) calculation.addLast(ret);
-          System.out.println(calculation);
+      //    System.out.println(calculation);
           }
       }
       return ret;
@@ -101,8 +101,14 @@ public class Calculator{
     */
 
     public static void main(String[] args) {
-      String string1 = "1 2 3 4 5 + * - -";
-      System.out.println(eval(string1));
+      String string1 = "10 2.0 +";
+      String string2 = "11 3 - 4 + 2.5 *";
+      String string3 = "8 2 + 99 9 - * 2 + 9 -";
+      String string4 = "1 2 3 4 5 + * - -";
+      System.out.println(eval(string1) + "should be 12");
+      System.out.println(eval(string2) + "should be 30");
+      System.out.println(eval(string3) + "should be 893");
+      System.out.println(eval(string4) + "should be 26");
     }
 
 
