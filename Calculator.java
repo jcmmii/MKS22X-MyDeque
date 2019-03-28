@@ -3,7 +3,7 @@ public class Calculator{
     /*Evaluate a postfix expression stored in s.
      *Assume valid postfix notation, separated by spaces.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") //suppresses warnings
     public static double eval(String s){
       MyDeque<Double> calculation = new MyDeque();
       String[] arr = s.split(" ");
@@ -19,7 +19,7 @@ public class Calculator{
           if (arr[x].equals("*")) ret = dou2 * dou1;
           if (arr[x].equals("/")) ret = dou2 / dou1;
           if (arr[x].equals("%")) ret = dou2 % dou1;
-          if (ret != 0.0) calculation.addLast(ret);
+          calculation.addLast(ret);
           }
       }
       return ret;
