@@ -8,24 +8,19 @@ public class Calculator{
     public static double eval(String s){
       MyDeque<Double> calculation = new MyDeque();
       String[] arr = s.split(" ");
-    //  System.out.println(Arrays.toString(arr));
       double ret = 0.0;
       for (int x = 0; x < arr.length; x++){
         if (checkNumber(arr[x])) {
           calculation.addLast(Double.parseDouble(arr[x]));
-      //    System.out.println(calculation.size());
-      //    System.out.println(calculation);
         } else {
           double dou1 = calculation.removeLast();
           double dou2 = calculation.removeLast();
-      //    System.out.println(calculation);
           if (arr[x].equals("+")) ret = dou2 + dou1;
           if (arr[x].equals("-")) ret = dou2 - dou1;
           if (arr[x].equals("*")) ret = dou2 * dou1;
           if (arr[x].equals("/")) ret = dou2 / dou1;
           if (arr[x].equals("%")) ret = dou2 % dou1;
           if (ret != 0.0) calculation.addLast(ret);
-      //    System.out.println(calculation);
           }
       }
       return ret;
