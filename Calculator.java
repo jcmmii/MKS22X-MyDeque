@@ -5,6 +5,7 @@ public class Calculator{
     @SuppressWarnings("unchecked")
     public static double eval(String s){
       MyDeque<Double> calculation = new MyDeque();
+      double ret = 0.0;
       for (int x = 0; x < s.length()-1; x++){
         if (s.charAt(x) != ' ') {
           if (checkNumber(s.substring(x,x+1))) {
@@ -12,7 +13,6 @@ public class Calculator{
           } else {
             double dou1 = calculation.getFirst();
             double dou2 = calculation.getFirst();
-            double ret = 0;
             if (s.substring(x,x+1).equals("+")) ret = dou1 + dou2;
             if (s.substring(x,x+1).equals("-")) ret = dou1 - dou2;
             if (s.substring(x,x+1).equals("*")) ret = dou1 * dou2;
@@ -95,8 +95,8 @@ public class Calculator{
     */
 
     public static void main(String[] args) {
-      String string1 = "11 3 - 4 + 2.5 *";
-      eval(string1);
+      String string1 = "1 2 3 4 5 + * - -";
+      System.out.println(eval(string1));
     }
 
 
